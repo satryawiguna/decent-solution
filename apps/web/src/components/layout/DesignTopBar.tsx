@@ -25,8 +25,7 @@ export default function DesignTopBar() {
         <div className="flex items-center gap-2">
           <ShoppingBag className="h-[19px] w-[22px] text-[#40484e]" />
           <span className="text-[14px] font-medium tracking-[0.14px] text-[#40484e]">
-            Items:{" "}
-            <span className="font-bold text-[#1c1b1b]">{itemCount}</span>
+            Items: <span className="font-bold text-[#1c1b1b]">{itemCount}</span>
           </span>
         </div>
         <div className="h-4 w-px bg-[#dfdfdf]" />
