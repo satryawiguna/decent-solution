@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { X } from "lucide-react";
 import { getItemsByCategory } from "@/domain/entities";
 import type { FurnitureCategory } from "@workspace-pro/shared";
 import LibraryItemCard from "./LibraryItemCard";
@@ -17,7 +18,12 @@ const CATEGORIES: {
   { id: "misc", label: "Misc", icon: Sparkles },
 ];
 
-export default function FurnitureLibrary() {
+interface FurnitureLibraryProps {
+  /** When provided a close (×) button appears — used for the mobile drawer */
+  onClose?: () => void;
+}
+
+export default function FurnitureLibrary({ onClose }: FurnitureLibraryProps) {
   const [activeTab, setActiveTab] = useState<FurnitureCategory>("chairs");
 
   const items = getItemsByCategory(activeTab);
@@ -26,12 +32,25 @@ export default function FurnitureLibrary() {
     <aside className="relative z-10 flex h-full w-[320px] shrink-0 flex-col overflow-hidden border-l border-[#dfdfdf] bg-[#f6f3f2]">
       {/* Header */}
       <div className="border-b border-[#dfdfdf] bg-[#fcf9f8] px-4 pt-4 pb-[17px]">
-        <h3 className="text-[20px] font-semibold leading-tight text-[#00415e]">
-          Furniture Library
-        </h3>
-        <p className="text-[16px] text-[#40484e]">
-          Select items to add to your plan
-        </p>
+        <div className="flex items-start justify-between">
+          <div>
+            <h3 className="text-[20px] font-semibold leading-tight text-[#00415e]">
+              Furniture Library
+            </h3>
+            <p className="text-[16px] text-[#40484e]">
+              Select items to add to your plan
+            </p>
+          </div>
+          {onClose && (
+            <button
+              onClick={onClose}
+              aria-label="Close library"
+              className="ml-2 mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-[#40484e] transition-colors hover:bg-[#00415e]/10 hover:text-[#00415e]"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Tabs */}
@@ -53,7 +72,7 @@ export default function FurnitureLibrary() {
       </div>
 
       {/* Item List – 2-column grid */}
-      <div className="flex-1 overflow-y-auto p-3">
+      <div className="scrollbar-thin flex-1 overflow-y-auto p-3">
         <div className="grid grid-cols-2 gap-3">
           {items.map((item) => (
             <LibraryItemCard key={item.id} item={item} />

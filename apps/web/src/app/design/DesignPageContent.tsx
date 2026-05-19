@@ -12,6 +12,7 @@ import {
   pointerWithin,
 } from "@dnd-kit/core";
 import { useSearchParams } from "next/navigation";
+import { LayoutGrid } from "lucide-react";
 import { useWorkspaceStore } from "@/application/store";
 import { getTemplateById } from "@/domain/entities";
 import type { PlacedItem, FurnitureItem } from "@workspace-pro/shared";
@@ -36,6 +37,9 @@ export default function DesignPageContent() {
 
   // --- DnD overlay state ---
   const [activeDrag, setActiveDrag] = useState<FurnitureItem | null>(null);
+
+  // --- Mobile sidebar drawer ---
+  const [libraryOpen, setLibraryOpen] = useState(false);
 
   // --- Sensors (pointer-based, 5px activation distance) ---
   const sensors = useSensors(
@@ -133,7 +137,7 @@ export default function DesignPageContent() {
         onDragEnd={handleDragEnd}
       >
         <div className="flex flex-1 overflow-hidden">
-          {/* Floorplan / Measure (2D) */}
+          {/* Floorplan (2D) */}
           {viewMode === "floorplan" && (
             <>
               <div className="relative min-w-0 flex-1 overflow-hidden">
@@ -148,9 +152,39 @@ export default function DesignPageContent() {
                 </WorkspaceCanvas>
 
                 <ViewControls />
+
+                {/* Mobile FAB: open library */}
+                <button
+                  onClick={() => setLibraryOpen(true)}
+                  aria-label="Open furniture library"
+                  className="absolute bottom-20 right-4 z-20 flex items-center gap-1.5 rounded-full bg-[#00415e] px-4 py-2.5 text-[13px] font-semibold text-white shadow-lg transition-opacity hover:opacity-90 lg:hidden"
+                >
+                  <LayoutGrid className="h-4 w-4" />
+                  Library
+                </button>
               </div>
 
-              <FurnitureLibrary />
+              {/* Desktop: inline sidebar */}
+              <div className="hidden lg:block">
+                <FurnitureLibrary />
+              </div>
+
+              {/* Mobile: backdrop */}
+              {libraryOpen && (
+                <div
+                  className="fixed inset-0 z-30 bg-black/30 lg:hidden"
+                  onClick={() => setLibraryOpen(false)}
+                />
+              )}
+
+              {/* Mobile: right-side drawer */}
+              <div
+                className={`fixed inset-y-0 right-0 z-40 transition-transform duration-300 lg:hidden ${
+                  libraryOpen ? "translate-x-0" : "translate-x-full"
+                }`}
+              >
+                <FurnitureLibrary onClose={() => setLibraryOpen(false)} />
+              </div>
             </>
           )}
 

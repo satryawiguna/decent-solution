@@ -3,7 +3,6 @@
 import { useRef, useState, useCallback } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Grid, Environment } from "@react-three/drei";
-import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import { useWorkspaceStore } from "@/application/store";
 import ThreeDItem from "./ThreeDItem";
 
@@ -18,7 +17,7 @@ export default function ThreeDScene() {
   const items = useWorkspaceStore((s) => s.items);
   const moveItem = useWorkspaceStore((s) => s.moveItem);
 
-  const orbitRef = useRef<OrbitControlsImpl>(null);
+  const orbitRef = useRef<any>(null);
 
   const [dragging, setDragging] = useState<{
     instanceId: string;

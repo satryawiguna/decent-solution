@@ -7,47 +7,63 @@ import {
   selectItemCount,
   selectTotalPrice,
 } from "@/application/store";
+import { formatCurrency } from "@/lib/format";
 
 export default function DesignTopBar() {
   const itemCount = useWorkspaceStore(selectItemCount);
   const totalPrice = useWorkspaceStore(selectTotalPrice);
 
   return (
-    <header className="flex h-16 shrink-0 items-center justify-between border-b border-[#dfdfdf] bg-[#fcf9f8] px-6">
+    <header className="flex h-16 shrink-0 items-center justify-between border-b border-[#dfdfdf] bg-[#fcf9f8] px-4 sm:px-6">
       {/* Logo */}
       <Link href="/" className="text-xl font-bold text-[#00415e]">
         WorkspacePro
       </Link>
 
-      {/* Stats pill */}
-      <div className="flex items-center gap-4 rounded-xl border border-[#dfdfdf] bg-white px-6 py-[9px] shadow-[0px_1px_1px_rgba(0,0,0,0.05)]">
+      {/* Stats pill — hidden on mobile to avoid crowding */}
+      <div className="hidden items-center gap-4 rounded-xl border border-[#dfdfdf] bg-white px-4 py-[9px] shadow-[0px_1px_1px_rgba(0,0,0,0.05)] sm:flex sm:px-6">
         <div className="flex items-center gap-2">
           <ShoppingBag className="h-[19px] w-[22px] text-[#40484e]" />
           <span className="text-[14px] font-medium tracking-[0.14px] text-[#40484e]">
-            Items: <span className="font-bold text-[#1c1b1b]">{itemCount}</span>
+            Items:{" "}
+            <span className="font-bold text-[#1c1b1b]">{itemCount}</span>
           </span>
         </div>
         <div className="h-4 w-px bg-[#dfdfdf]" />
         <span className="text-[14px] font-medium tracking-[0.14px] text-[#40484e]">
           Total:{" "}
           <span className="font-bold text-[#00415e]">
-            Rp{totalPrice.toFixed(2)}
+            {formatCurrency(totalPrice, 2)}
           </span>
         </span>
       </div>
 
+      {/* Mobile: compact item badge */}
+      <div className="flex items-center gap-1.5 sm:hidden">
+        <ShoppingBag className="h-4 w-4 text-[#40484e]" />
+        <span className="text-[13px] font-semibold text-[#1c1b1b]">
+          {itemCount}
+        </span>
+      </div>
+
       {/* Actions */}
-      <div className="flex items-center gap-4">
-        <button className="text-[#1c1b1b] transition-opacity hover:opacity-60">
+      <div className="flex items-center gap-2 sm:gap-4">
+        <button
+          aria-label="Bookmark"
+          className="flex h-9 w-9 items-center justify-center rounded-lg text-[#1c1b1b] transition-colors hover:bg-[#00415e]/10"
+        >
           <Bookmark className="h-[18px] w-[18px]" />
         </button>
-        <button className="text-[#1c1b1b] transition-opacity hover:opacity-60">
+        <button
+          aria-label="Share"
+          className="flex h-9 w-9 items-center justify-center rounded-lg text-[#1c1b1b] transition-colors hover:bg-[#00415e]/10"
+        >
           <Share2 className="h-[18px] w-[18px]" />
         </button>
         {itemCount > 0 && (
           <Link
             href="/checkout"
-            className="rounded-[4px] bg-[#00415e] px-4 py-2 text-[14px] font-medium tracking-[0.14px] text-white transition-opacity hover:opacity-80"
+            className="rounded-[4px] bg-[#00415e] px-3 py-2 text-[13px] font-medium tracking-[0.14px] text-white transition-opacity hover:opacity-80 sm:px-4 sm:text-[14px]"
           >
             Checkout
           </Link>
