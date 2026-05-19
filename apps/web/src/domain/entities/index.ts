@@ -1,3 +1,6 @@
-export {};
-
-// Domain entities – core business objects
+export {
+  furnitureCatalog,
+  getItemsByCategory,
+  getItemById,
+} from "./furniture.data";
+export { workspaceTemplates, getTemplateById } from "./templates.data";
