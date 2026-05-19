@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="30" viewBox="0 0 120 30">
+  <rect width="120" height="30" rx="6" fill="#f1f5f9" opacity="0.3"/>
+  <rect x="4" y="4" width="112" height="22" rx="4" fill="#f8fafc"/>
+  <line x1="20" y1="12" x2="50" y2="12" stroke="#94a3b8" stroke-width="2"/>
+  <text x="55" y="16" font-family="sans-serif" font-size="8" fill="#64748b">workspace ideas...</text>
+</svg>

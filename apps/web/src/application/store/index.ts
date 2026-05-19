@@ -1,3 +1,10 @@
-export {};
-
-// Zustand store(s) – global state management
+export {
+  useWorkspaceStore,
+  selectItemCount,
+  selectTotalPrice,
+} from "./workspace.store";
+export type {
+  WorkspaceState,
+  WorkspaceActions,
+  WorkspaceStore,
+} from "./workspace.store";
