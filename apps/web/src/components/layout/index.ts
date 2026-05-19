@@ -1,3 +1,1 @@
-export {};
-
-// Layout components – TopBar, Sidebar, ViewControls
+export { default as Header } from './Header';
