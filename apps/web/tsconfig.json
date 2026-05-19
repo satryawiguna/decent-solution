@@ -20,7 +20,8 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@workspace/*": ["./src/*"]
+      "@workspace/*": ["./src/*"],
+      "@workspace-pro/shared": ["./src/lib/shared.ts"]
     },
     "baseUrl": "."
   },
