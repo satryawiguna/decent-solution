@@ -9,7 +9,7 @@ import { LayoutGrid, Monitor, Archive, Sparkles } from "lucide-react";
 const CATEGORIES: {
   id: FurnitureCategory;
   label: string;
-  icon: typeof Plus;
+  icon: typeof LayoutGrid;
 }[] = [
   { id: "chairs", label: "Chairs", icon: LayoutGrid },
   { id: "desks", label: "Desks", icon: Monitor },
