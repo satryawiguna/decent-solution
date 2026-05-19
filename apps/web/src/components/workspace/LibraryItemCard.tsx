@@ -51,7 +51,7 @@ export default function LibraryItemCard({ item }: LibraryItemCardProps) {
         <span className="text-[14px] font-medium text-[#1c1b1b]">
           {item.name}
         </span>
-        <span className="text-[14px] text-[#40484e]">${item.price}/mo</span>
+        <span className="text-[14px] text-[#40484e]">Rp{item.price}/mo</span>
       </div>
     </div>
   );

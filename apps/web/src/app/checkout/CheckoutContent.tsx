@@ -195,7 +195,7 @@ export default function CheckoutContent() {
                     {/* Price */}
                     <div className="shrink-0 text-right">
                       <p className="text-[15px] font-bold text-[#00415e]">
-                        ${li.pricePerMonth * li.quantity}
+                        Rp{li.pricePerMonth * li.quantity}
                         <span className="text-[12px] font-medium text-[#40484e]">
                           /mo
                         </span>
@@ -252,7 +252,7 @@ export default function CheckoutContent() {
               <div className="mb-4 space-y-2 border-b border-[#dfdfdf] pb-4">
                 <div className="flex justify-between text-[14px] text-[#40484e]">
                   <span>Monthly rate</span>
-                  <span>${monthlyTotal.toFixed(2)}</span>
+                  <span>Rp{monthlyTotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-[14px] text-[#40484e]">
                   <span>Duration</span>
@@ -265,7 +265,7 @@ export default function CheckoutContent() {
                   Total
                 </span>
                 <span className="text-[20px] font-bold text-[#00415e]">
-                  ${grandTotal.toFixed(2)}
+                  Rp{grandTotal.toFixed(2)}
                 </span>
               </div>
 

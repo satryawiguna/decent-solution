@@ -31,7 +31,7 @@ export default function DesignTopBar() {
         <span className="text-[14px] font-medium tracking-[0.14px] text-[#40484e]">
           Total:{" "}
           <span className="font-bold text-[#00415e]">
-            ${totalPrice.toFixed(2)}
+            Rp{totalPrice.toFixed(2)}
           </span>
         </span>
       </div>

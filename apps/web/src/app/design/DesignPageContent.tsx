@@ -182,7 +182,7 @@ export default function DesignPageContent() {
                   {activeDrag.name}
                 </span>
                 <span className="ml-1 shrink-0 text-[11px] text-[#40484e]">
-                  ${activeDrag.price}
+                  Rp{activeDrag.price}
                 </span>
               </div>
             </div>

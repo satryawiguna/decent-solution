@@ -3,10 +3,11 @@
 import { useMemo } from "react";
 import { Box, Cylinder, Sphere, Cone } from "@react-three/drei";
 import type { PlacedItem } from "@workspace-pro/shared";
-import * as THREE from "three";
 
 interface ThreeDItemProps {
   item: PlacedItem;
+  onDragStart: (instanceId: string, offsetX: number, offsetZ: number) => void;
+  isDragging: boolean;
 }
 
 // Color palette per item type
@@ -24,7 +25,11 @@ function getColor(item: PlacedItem): string {
   return COLORS.misc;
 }
 
-export default function ThreeDItem({ item }: ThreeDItemProps) {
+export default function ThreeDItem({
+  item,
+  onDragStart,
+  isDragging,
+}: ThreeDItemProps) {
   const color = getColor(item);
   const w = item.dimensions.width * 0.4;
   const h = item.dimensions.height * 0.4;
@@ -181,7 +186,28 @@ export default function ThreeDItem({ item }: ThreeDItemProps) {
     <group
       position={[px, 0, pz]}
       rotation={[0, item.rotation * (Math.PI / 180), 0]}
+      onPointerDown={(e) => {
+        e.stopPropagation();
+        // offset = where the user clicked relative to the item's 3D centre
+        onDragStart(item.instanceId, e.point.x - px, e.point.z - pz);
+      }}
     >
+      {/* Hit-test envelope so clicks register even in gaps between meshes */}
+      <mesh visible={false}>
+        <boxGeometry args={[Math.max(w, 0.4), 1.2, Math.max(h, 0.4)]} />
+        <meshBasicMaterial />
+      </mesh>
+
+      {/* Highlight ring while dragging */}
+      {isDragging && (
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.01, 0]}>
+          <ringGeometry
+            args={[Math.max(w, h) * 0.6, Math.max(w, h) * 0.7, 32]}
+          />
+          <meshBasicMaterial color="#90cffb" />
+        </mesh>
+      )}
+
       {geometry}
     </group>
   );

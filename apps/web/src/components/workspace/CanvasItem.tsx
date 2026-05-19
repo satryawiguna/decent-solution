@@ -72,7 +72,7 @@ export default function CanvasItem({ item, onRemove }: CanvasItemProps) {
           {item.name}
         </span>
         <span className="ml-1 shrink-0 text-[11px] text-[#40484e]">
-          ${item.price}
+          Rp{item.price}
         </span>
       </div>
     </div>
