@@ -19,6 +19,7 @@ import DesignTopBar from '@/components/layout/DesignTopBar';
 import FurnitureLibrary from '@/components/workspace/FurnitureLibrary';
 import WorkspaceCanvas from '@/components/workspace/WorkspaceCanvas';
 import CanvasItem from '@/components/workspace/CanvasItem';
+import ThreeDScene from '@/components/workspace/ThreeDScene';
 import ViewControls from '@/components/workspace/ViewControls';
 
 export default function DesignPageContent() {
@@ -26,6 +27,7 @@ export default function DesignPageContent() {
 
   // --- Store ---
   const items = useWorkspaceStore((s) => s.items);
+  const viewMode = useWorkspaceStore((s) => s.viewMode);
   const addItem = useWorkspaceStore((s) => s.addItem);
   const removeItem = useWorkspaceStore((s) => s.removeItem);
   const moveItem = useWorkspaceStore((s) => s.moveItem);
@@ -121,21 +123,43 @@ export default function DesignPageContent() {
         onDragEnd={handleDragEnd}
       >
         <div className="flex flex-1 overflow-hidden">
-          <div className="relative flex-1">
-            <WorkspaceCanvas isEmpty={items.length === 0}>
-              {items.map((item) => (
-                <CanvasItem
-                  key={item.instanceId}
-                  item={item}
-                  onRemove={removeItem}
-                />
-              ))}
-            </WorkspaceCanvas>
+          {/* Floorplan / Measure (2D) */}
+          {(viewMode === 'floorplan' || viewMode === 'measure') && (
+            <>
+              <div className="relative flex-1">
+                <WorkspaceCanvas isEmpty={items.length === 0}>
+                  {items.map((item) => (
+                    <CanvasItem
+                      key={item.instanceId}
+                      item={item}
+                      onRemove={removeItem}
+                    />
+                  ))}
+                </WorkspaceCanvas>
 
-            <ViewControls />
-          </div>
+                <ViewControls />
+              </div>
 
-          <FurnitureLibrary />
+              {viewMode === 'floorplan' && <FurnitureLibrary />}
+
+              {viewMode === 'measure' && (
+                <aside className="flex w-72 shrink-0 flex-col items-center justify-center border-l border-brand-800/60 bg-brand-950/50 p-6">
+                  <p className="text-sm font-medium text-brand-300">Measurement Mode</p>
+                  <p className="mt-2 text-center text-xs text-brand-500">
+                    Click and drag to measure distances between items on the canvas.
+                  </p>
+                </aside>
+              )}
+            </>
+          )}
+
+          {/* 3D View */}
+          {viewMode === '3d' && (
+            <div className="relative flex-1">
+              <ThreeDScene />
+              <ViewControls />
+            </div>
+          )}
         </div>
 
         <DragOverlay dropAnimation={null}>

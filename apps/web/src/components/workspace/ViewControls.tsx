@@ -15,31 +15,25 @@ export default function ViewControls() {
   const setViewMode = useWorkspaceStore((s) => s.setViewMode);
 
   return (
-    <div className="absolute bottom-4 left-4 flex gap-1 rounded-xl border border-brand-800/80 bg-brand-950/90 p-1 backdrop-blur-sm">
-      {modes.map(({ id, label, icon: Icon }) => (
-        <button
-          key={id}
-          onClick={() => setViewMode(id)}
-          disabled={id === 'measure' || id === '3d'}
-          className={`flex items-center gap-2 rounded-lg px-3 py-2 text-xs font-medium transition-colors ${
-            viewMode === id
-              ? 'bg-blue-600 text-white'
-              : id === 'measure' || id === '3d'
-                ? 'cursor-not-allowed text-brand-600'
-                : 'text-brand-300 hover:text-white'
-          }`}
-          title={
-            id === 'measure'
-              ? 'Coming soon'
-              : id === '3d'
-                ? 'Coming soon'
-                : label
-          }
-        >
-          <Icon className="h-3.5 w-3.5" />
-          <span className="hidden sm:inline">{label}</span>
-        </button>
-      ))}
+    <div className="absolute bottom-4 left-4 z-40 flex gap-1 rounded-xl border border-brand-800/80 bg-brand-950/90 p-1 backdrop-blur-sm">
+      {modes.map(({ id, label, icon: Icon }) => {
+        const isActive = viewMode === id;
+
+        return (
+          <button
+            key={id}
+            onClick={() => setViewMode(id)}
+            className={`flex items-center gap-2 rounded-lg px-3 py-2 text-xs font-medium transition-colors ${
+              isActive
+                ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20'
+                : 'text-brand-300 hover:bg-brand-800/50 hover:text-white'
+            }`}
+          >
+            <Icon className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline">{label}</span>
+          </button>
+        );
+      })}
     </div>
   );
 }
