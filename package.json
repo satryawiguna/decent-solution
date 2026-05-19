@@ -1,0 +1,19 @@
+{
+  "name": "workspace-pro",
+  "private": true,
+  "version": "1.0.0",
+  "description": "WorkspacePro – Interactive workspace design tool for monis.rent",
+  "scripts": {
+    "dev": "pnpm exec turbo dev",
+    "build": "pnpm exec turbo build",
+    "lint": "pnpm exec turbo lint",
+    "clean": "pnpm exec turbo clean"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "devDependencies": {
+    "turbo": "^1.13.0"
+  }
+}
