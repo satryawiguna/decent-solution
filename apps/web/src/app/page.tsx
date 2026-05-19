@@ -1,28 +1,28 @@
-import Link from 'next/link';
-import { workspaceTemplates } from '@/domain/entities';
-import TemplateCard from '@/components/ui/TemplateCard';
+import Link from "next/link";
+import { workspaceTemplates } from "@/domain/entities";
+import TemplateCard from "@/components/ui/TemplateCard";
 
 const templateMeta: Record<
   string,
   { tag: string; tagColor: string; description: string }
 > = {
-  'home-office': {
-    tag: 'For individuals',
-    tagColor: 'teal',
+  "home-office": {
+    tag: "For individuals",
+    tagColor: "teal",
     description:
-      'Ideal for individual focus and domestic comfort. A single desk with ergonomic seating and personal accents.',
+      "Ideal for individual focus and domestic comfort. A single desk with ergonomic seating and personal accents.",
   },
-  'collaborative-studio': {
-    tag: 'For teams',
-    tagColor: 'purple',
+  "collaborative-studio": {
+    tag: "For teams",
+    tagColor: "purple",
     description:
-      'Built for teams that thrive together. Modular tables, shared storage, and breakout areas.',
+      "Built for teams that thrive together. Modular tables, shared storage, and breakout areas.",
   },
-  'executive-suite': {
-    tag: 'For leaders',
-    tagColor: 'amber',
+  "executive-suite": {
+    tag: "For leaders",
+    tagColor: "amber",
     description:
-      'A premium environment for leadership and focus. Commanding desk, executive seating, and refined aesthetics.',
+      "A premium environment for leadership and focus. Commanding desk, executive seating, and refined aesthetics.",
   },
 };
 
@@ -45,7 +45,7 @@ export default function HomePage() {
         {workspaceTemplates.map((template) => {
           const meta = templateMeta[template.id] ?? {
             tag: template.name,
-            tagColor: 'teal',
+            tagColor: "teal",
             description: template.description,
           };
 

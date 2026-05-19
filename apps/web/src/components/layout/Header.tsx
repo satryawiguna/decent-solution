@@ -1,14 +1,17 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { LayoutGrid } from 'lucide-react';
+import Link from "next/link";
+import { LayoutGrid } from "lucide-react";
 
 export default function Header() {
   return (
     <header className="fixed top-0 z-50 w-full border-b border-brand-800/60 bg-brand-950/80 backdrop-blur-md">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 text-lg font-bold text-white">
+        <Link
+          href="/"
+          className="flex items-center gap-2 text-lg font-bold text-white"
+        >
           <LayoutGrid className="h-5 w-5 text-blue-400" />
           <span>WorkspacePro</span>
         </Link>
