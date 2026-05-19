@@ -41,3 +41,18 @@ export interface WorkspaceTemplate {
 // ---- View Mode ----
 
 export type ViewMode = "floorplan" | "measure" | "3d";
+
+// ---- Checkout ----
+
+export const RENTAL_PERIODS = [1, 3, 6, 12] as const;
+export type RentalPeriod = (typeof RENTAL_PERIODS)[number];
+
+export interface CheckoutLineItem {
+  /** Furniture item id (not instanceId). */
+  id: string;
+  name: string;
+  category: FurnitureCategory;
+  imageUrl: string;
+  pricePerMonth: number;
+  quantity: number;
+}

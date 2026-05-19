@@ -31,7 +31,7 @@ export default function DesignTopBar() {
         <span className="text-[14px] font-medium tracking-[0.14px] text-[#40484e]">
           Total:{" "}
           <span className="font-bold text-[#00415e]">
-            ${totalPrice.toFixed(2)}
+            Rp{totalPrice.toFixed(2)}
           </span>
         </span>
       </div>
@@ -44,6 +44,14 @@ export default function DesignTopBar() {
         <button className="text-[#1c1b1b] transition-opacity hover:opacity-60">
           <Share2 className="h-[18px] w-[18px]" />
         </button>
+        {itemCount > 0 && (
+          <Link
+            href="/checkout"
+            className="rounded-[4px] bg-[#00415e] px-4 py-2 text-[14px] font-medium tracking-[0.14px] text-white transition-opacity hover:opacity-80"
+          >
+            Checkout
+          </Link>
+        )}
       </div>
     </header>
   );

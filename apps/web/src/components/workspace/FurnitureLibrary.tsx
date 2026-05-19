@@ -9,7 +9,7 @@ import { LayoutGrid, Monitor, Archive, Sparkles } from "lucide-react";
 const CATEGORIES: {
   id: FurnitureCategory;
   label: string;
-  icon: typeof Plus;
+  icon: typeof LayoutGrid;
 }[] = [
   { id: "chairs", label: "Chairs", icon: LayoutGrid },
   { id: "desks", label: "Desks", icon: Monitor },
@@ -29,12 +29,9 @@ export default function FurnitureLibrary() {
         <h3 className="text-[20px] font-semibold leading-tight text-[#00415e]">
           Furniture Library
         </h3>
-        <p className="pb-4 text-[16px] text-[#40484e]">
+        <p className="text-[16px] text-[#40484e]">
           Select items to add to your plan
         </p>
-        <button className="w-full rounded-[4px] bg-[#00415e] py-2 text-center text-[14px] font-medium tracking-[0.14px] text-white transition-opacity hover:opacity-80">
-          Add custom item
-        </button>
       </div>
 
       {/* Tabs */}
