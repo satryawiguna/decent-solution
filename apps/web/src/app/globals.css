@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    /* Pages set their own background; body is transparent to avoid FOUC */
+    @apply bg-[#fcf9f8] text-[#1c1b1b] antialiased;
+    font-family: var(--font-inter), system-ui, sans-serif;
+  }
+
+  /* Consistent focus ring across all interactive elements */
+  :focus-visible {
+    @apply outline-none ring-2 ring-[#00415e] ring-offset-2;
+  }
+
+  /* Subtle text selection colour */
+  ::selection {
+    @apply bg-[#00415e]/20 text-[#00415e];
+  }
+}
+
+@layer utilities {
+  /* Thin scrollbar for sidebar lists */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: #dfdfdf transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #dfdfdf;
+    border-radius: 99px;
+  }
+}
