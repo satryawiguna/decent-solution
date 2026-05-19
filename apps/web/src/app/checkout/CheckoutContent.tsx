@@ -153,7 +153,8 @@ export default function CheckoutContent() {
               {/* List header */}
               <div className="flex items-center justify-between border-b border-[#dfdfdf] px-6 py-4">
                 <span className="text-[14px] font-semibold text-[#1c1b1b]">
-                  {lineItems.length} item{lineItems.length !== 1 ? "s" : ""} selected
+                  {lineItems.length} item{lineItems.length !== 1 ? "s" : ""}{" "}
+                  selected
                 </span>
                 <button
                   onClick={() => clearAll()}
@@ -166,10 +167,7 @@ export default function CheckoutContent() {
               {/* Rows */}
               <ul className="divide-y divide-[#dfdfdf]">
                 {lineItems.map((li) => (
-                  <li
-                    key={li.id}
-                    className="flex items-center gap-4 px-6 py-4"
-                  >
+                  <li key={li.id} className="flex items-center gap-4 px-6 py-4">
                     {/* Image */}
                     <div className="h-[72px] w-[72px] shrink-0 overflow-hidden rounded-[4px] bg-[#ebe7e7]">
                       <img
