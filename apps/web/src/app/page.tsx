@@ -43,16 +43,16 @@ export default function HomePage() {
       <Header />
 
       {/* Main Content */}
-      <main className="flex flex-col items-center px-6 pb-20 pt-24">
+      <main className="flex flex-col items-center px-4 pb-20 pt-24 sm:px-6">
         {/* Title Section */}
-        <div className="mb-8 flex max-w-[896px] flex-col items-center gap-2 text-center">
+        <div className="mb-8 flex max-w-[896px] flex-col items-center gap-3 text-center">
           <h1
-            className="text-[48px] font-bold leading-[56px] tracking-[-0.96px] text-[#00415e]"
+            className="text-3xl font-bold leading-tight tracking-tight text-[#00415e] sm:text-4xl lg:text-[48px] lg:leading-[56px] lg:tracking-[-0.96px]"
             style={{ fontFamily: "Inter, sans-serif" }}
           >
             Define Your Space
           </h1>
-          <p className="max-w-[672px] text-[18px] leading-[28px] text-[#40484e]">
+          <p className="max-w-[672px] text-base leading-relaxed text-[#40484e] sm:text-[18px] sm:leading-[28px]">
             Select a workspace archetype to begin your planning journey. Each
             template is optimized for specific productivity needs and spatial
             layouts.
@@ -64,14 +64,14 @@ export default function HomePage() {
           {templates.map(({ id, name, icon: Icon, image, description }) => (
             <div
               key={id}
-              className="relative flex flex-col rounded-[8px] border border-[#dfdfdf] bg-[#fcf9f8] p-[33px]"
+              className="group relative flex flex-col rounded-[8px] border border-[#dfdfdf] bg-[#fcf9f8] p-6 transition-all duration-200 hover:-translate-y-1 hover:border-[#00415e]/30 hover:shadow-lg sm:p-[33px]"
             >
               {/* Photo */}
               <div className="relative mb-4 aspect-[4/3] w-full overflow-hidden rounded-[4px] bg-[#f6f3f2]">
                 <img
                   src={image}
                   alt={name}
-                  className="absolute inset-0 h-[133.34%] w-full max-w-none object-cover"
+                  className="absolute inset-0 h-[133.34%] w-full max-w-none object-cover transition-transform duration-300 group-hover:scale-105"
                   style={{ top: "-16.67%" }}
                 />
               </div>
@@ -79,23 +79,23 @@ export default function HomePage() {
               {/* Title row */}
               <div className="mb-2 flex items-center gap-2">
                 <Icon className="h-[18px] w-[18px] shrink-0 text-[#00415e]" />
-                <h3 className="text-[20px] font-semibold leading-[28px] text-[#00415e]">
+                <h3 className="text-[18px] font-semibold leading-[28px] text-[#00415e] sm:text-[20px]">
                   {name}
                 </h3>
               </div>
 
               {/* Description */}
-              <p className="mb-4 text-[16px] leading-[24px] text-[#40484e]">
+              <p className="mb-5 flex-1 text-[15px] leading-[24px] text-[#40484e] sm:text-[16px]">
                 {description}
               </p>
 
               {/* CTA */}
               <Link
                 href={`/design?template=${id}`}
-                className="flex items-center gap-2 text-[16px] leading-[24px] text-[#00415e] transition-opacity hover:opacity-70"
+                className="inline-flex items-center gap-2 text-[15px] font-semibold leading-[24px] text-[#00415e] transition-all duration-150 hover:gap-3 hover:opacity-80 sm:text-[16px]"
               >
                 Select Template
-                <ChevronRight className="h-[14px] w-[14px]" />
+                <ChevronRight className="h-[14px] w-[14px] transition-transform duration-150 group-hover:translate-x-0.5" />
               </Link>
             </div>
           ))}

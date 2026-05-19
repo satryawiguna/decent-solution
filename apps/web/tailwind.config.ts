@@ -28,6 +28,25 @@ const config: Config = {
         "88": "22rem",
         "120": "30rem",
       },
+      keyframes: {
+        "fade-in": {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
+        "slide-in-right": {
+          from: { transform: "translateX(100%)" },
+          to: { transform: "translateX(0)" },
+        },
+        "slide-up": {
+          from: { transform: "translateY(8px)", opacity: "0" },
+          to: { transform: "translateY(0)", opacity: "1" },
+        },
+      },
+      animation: {
+        "fade-in": "fade-in 150ms ease-out",
+        "slide-in-right": "slide-in-right 200ms ease-out",
+        "slide-up": "slide-up 200ms ease-out",
+      },
     },
   },
   plugins: [],

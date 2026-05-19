@@ -6,6 +6,7 @@ import { Trash2, ArrowLeft, ShoppingBag, CheckCircle } from "lucide-react";
 import { useWorkspaceStore } from "@/application/store";
 import type { CheckoutLineItem, RentalPeriod } from "@workspace-pro/shared";
 import { RENTAL_PERIODS } from "@workspace-pro/shared";
+import { formatCurrency } from "@/lib/format";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -122,17 +123,16 @@ export default function CheckoutContent() {
   return (
     <div className="min-h-screen bg-[#fcf9f8]">
       {/* Top bar */}
-      <header className="flex h-16 items-center justify-between border-b border-[#dfdfdf] bg-[#fcf9f8] px-6">
+      <header className="flex h-16 items-center border-b border-[#dfdfdf] bg-[#fcf9f8] px-4 sm:px-6">
         <Link href="/" className="text-xl font-bold text-[#00415e]">
           WorkspacePro
         </Link>
-        <span className="text-[14px] font-semibold text-[#1c1b1b]">
+        <span className="ml-auto text-[14px] font-semibold text-[#1c1b1b]">
           Checkout
         </span>
-        <div className="w-32" />
       </header>
 
-      <main className="mx-auto max-w-[960px] px-6 py-10">
+      <main className="mx-auto max-w-[960px] px-4 py-8 sm:px-6 sm:py-10">
         {/* Back link */}
         <Link
           href="/design"
@@ -142,23 +142,23 @@ export default function CheckoutContent() {
           Back to Designer
         </Link>
 
-        <h1 className="mb-8 text-[32px] font-bold leading-tight text-[#00415e]">
+        <h1 className="mb-8 text-2xl font-bold leading-tight text-[#00415e] sm:text-[32px]">
           Review Your Setup
         </h1>
 
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-start">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-8">
           {/* ---- Item list ---- */}
-          <div className="flex-1 min-w-0">
+          <div className="min-w-0 flex-1">
             <div className="overflow-hidden rounded-[8px] border border-[#dfdfdf] bg-white">
               {/* List header */}
-              <div className="flex items-center justify-between border-b border-[#dfdfdf] px-6 py-4">
+              <div className="flex items-center justify-between border-b border-[#dfdfdf] px-4 py-4 sm:px-6">
                 <span className="text-[14px] font-semibold text-[#1c1b1b]">
                   {lineItems.length} item{lineItems.length !== 1 ? "s" : ""}{" "}
                   selected
                 </span>
                 <button
                   onClick={() => clearAll()}
-                  className="text-[13px] text-[#40484e] underline-offset-2 hover:text-red-500 hover:underline"
+                  className="text-[13px] text-[#40484e] underline-offset-2 transition-colors hover:text-red-500 hover:underline"
                 >
                   Remove all
                 </button>
@@ -167,9 +167,12 @@ export default function CheckoutContent() {
               {/* Rows */}
               <ul className="divide-y divide-[#dfdfdf]">
                 {lineItems.map((li) => (
-                  <li key={li.id} className="flex items-center gap-4 px-6 py-4">
+                  <li
+                    key={li.id}
+                    className="flex items-center gap-3 px-4 py-4 sm:gap-4 sm:px-6"
+                  >
                     {/* Image */}
-                    <div className="h-[72px] w-[72px] shrink-0 overflow-hidden rounded-[4px] bg-[#ebe7e7]">
+                    <div className="h-[64px] w-[64px] shrink-0 overflow-hidden rounded-[4px] bg-[#ebe7e7] sm:h-[72px] sm:w-[72px]">
                       <img
                         src={li.imageUrl}
                         alt={li.name}
@@ -179,14 +182,14 @@ export default function CheckoutContent() {
 
                     {/* Info */}
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-[15px] font-semibold text-[#1c1b1b]">
+                      <p className="truncate text-[14px] font-semibold text-[#1c1b1b] sm:text-[15px]">
                         {li.name}
                       </p>
-                      <p className="mt-0.5 text-[13px] capitalize text-[#40484e]">
+                      <p className="mt-0.5 text-[12px] capitalize text-[#40484e] sm:text-[13px]">
                         {li.category}
                       </p>
                       {li.quantity > 1 && (
-                        <p className="mt-0.5 text-[13px] text-[#40484e]">
+                        <p className="mt-0.5 text-[12px] text-[#40484e] sm:text-[13px]">
                           Qty: {li.quantity}
                         </p>
                       )}
@@ -194,9 +197,9 @@ export default function CheckoutContent() {
 
                     {/* Price */}
                     <div className="shrink-0 text-right">
-                      <p className="text-[15px] font-bold text-[#00415e]">
-                        Rp{li.pricePerMonth * li.quantity}
-                        <span className="text-[12px] font-medium text-[#40484e]">
+                      <p className="text-[14px] font-bold text-[#00415e] sm:text-[15px]">
+                        {formatCurrency(li.pricePerMonth * li.quantity)}
+                        <span className="text-[11px] font-medium text-[#40484e] sm:text-[12px]">
                           /mo
                         </span>
                       </p>
@@ -205,7 +208,7 @@ export default function CheckoutContent() {
                     {/* Remove */}
                     <button
                       onClick={() => handleRemoveAll(li.id)}
-                      className="ml-2 shrink-0 rounded p-1 text-[#40484e] transition-colors hover:bg-red-50 hover:text-red-500"
+                      className="ml-1 shrink-0 rounded p-1 text-[#40484e] transition-colors hover:bg-red-50 hover:text-red-500"
                       aria-label={`Remove ${li.name}`}
                     >
                       <Trash2 className="h-4 w-4" />
@@ -217,8 +220,8 @@ export default function CheckoutContent() {
           </div>
 
           {/* ---- Order summary ---- */}
-          <div className="w-full lg:w-[320px] shrink-0">
-            <div className="rounded-[8px] border border-[#dfdfdf] bg-white p-6">
+          <div className="w-full shrink-0 lg:sticky lg:top-6 lg:w-[320px]">
+            <div className="rounded-[8px] border border-[#dfdfdf] bg-white p-5 sm:p-6">
               <h2 className="mb-6 text-[18px] font-bold text-[#1c1b1b]">
                 Order Summary
               </h2>
@@ -252,7 +255,7 @@ export default function CheckoutContent() {
               <div className="mb-4 space-y-2 border-b border-[#dfdfdf] pb-4">
                 <div className="flex justify-between text-[14px] text-[#40484e]">
                   <span>Monthly rate</span>
-                  <span>Rp{monthlyTotal.toFixed(2)}</span>
+                  <span>{formatCurrency(monthlyTotal, 2)}</span>
                 </div>
                 <div className="flex justify-between text-[14px] text-[#40484e]">
                   <span>Duration</span>
@@ -265,7 +268,7 @@ export default function CheckoutContent() {
                   Total
                 </span>
                 <span className="text-[20px] font-bold text-[#00415e]">
-                  Rp{grandTotal.toFixed(2)}
+                  {formatCurrency(grandTotal, 2)}
                 </span>
               </div>
 
