@@ -11,6 +11,7 @@ export interface FurnitureItem {
   category: FurnitureCategory;
   price: number;
   imageUrl: string;
+  isNew?: boolean;
   dimensions: {
     width: number; // in grid units
     height: number; // in grid units
