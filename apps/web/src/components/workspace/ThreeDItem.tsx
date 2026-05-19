@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useMemo } from 'react';
-import { Box, Cylinder, Sphere, Cone } from '@react-three/drei';
-import type { PlacedItem } from '@workspace-pro/shared';
-import * as THREE from 'three';
+import { useMemo } from "react";
+import { Box, Cylinder, Sphere, Cone } from "@react-three/drei";
+import type { PlacedItem } from "@workspace-pro/shared";
+import * as THREE from "three";
 
 interface ThreeDItemProps {
   item: PlacedItem;
@@ -11,16 +11,16 @@ interface ThreeDItemProps {
 
 // Color palette per item type
 const COLORS: Record<string, string> = {
-  desk: '#3b82f6',
-  chair: '#22c55e',
-  storage: '#f59e0b',
-  misc: '#a855f7',
+  desk: "#3b82f6",
+  chair: "#22c55e",
+  storage: "#f59e0b",
+  misc: "#a855f7",
 };
 
 function getColor(item: PlacedItem): string {
-  if (item.id.startsWith('desk')) return COLORS.desk;
-  if (item.id.startsWith('chair')) return COLORS.chair;
-  if (item.id.startsWith('storage')) return COLORS.storage;
+  if (item.id.startsWith("desk")) return COLORS.desk;
+  if (item.id.startsWith("chair")) return COLORS.chair;
+  if (item.id.startsWith("storage")) return COLORS.storage;
   return COLORS.misc;
 }
 
@@ -32,13 +32,13 @@ export default function ThreeDItem({ item }: ThreeDItemProps) {
   const pz = -(item.y - 200) * 0.04;
 
   const geometry = useMemo(() => {
-    const isDesk = item.id.startsWith('desk');
-    const isChair = item.id.startsWith('chair');
-    const isStorage = item.id.startsWith('storage');
-    const isMonitor = item.id === 'misc-monitor';
-    const isPlant = item.id === 'misc-plant';
-    const isLamp = item.id === 'misc-lamp';
-    const isWhiteboard = item.id === 'misc-whiteboard';
+    const isDesk = item.id.startsWith("desk");
+    const isChair = item.id.startsWith("chair");
+    const isStorage = item.id.startsWith("storage");
+    const isMonitor = item.id === "misc-monitor";
+    const isPlant = item.id === "misc-plant";
+    const isLamp = item.id === "misc-lamp";
+    const isWhiteboard = item.id === "misc-whiteboard";
 
     if (isDesk) {
       return (
@@ -48,8 +48,17 @@ export default function ThreeDItem({ item }: ThreeDItemProps) {
             <meshStandardMaterial color={color} />
           </Box>
           {/* Legs */}
-          {[[-w / 2 + 0.2, 0.4, -h / 2 + 0.2], [w / 2 - 0.2, 0.4, -h / 2 + 0.2], [-w / 2 + 0.2, 0.4, h / 2 - 0.2], [w / 2 - 0.2, 0.4, h / 2 - 0.2]].map((pos, i) => (
-            <Cylinder key={i} args={[0.06, 0.06, 0.8]} position={pos as [number, number, number]}>
+          {[
+            [-w / 2 + 0.2, 0.4, -h / 2 + 0.2],
+            [w / 2 - 0.2, 0.4, -h / 2 + 0.2],
+            [-w / 2 + 0.2, 0.4, h / 2 - 0.2],
+            [w / 2 - 0.2, 0.4, h / 2 - 0.2],
+          ].map((pos, i) => (
+            <Cylinder
+              key={i}
+              args={[0.06, 0.06, 0.8]}
+              position={pos as [number, number, number]}
+            >
               <meshStandardMaterial color="#6b7280" />
             </Cylinder>
           ))}
@@ -69,8 +78,17 @@ export default function ThreeDItem({ item }: ThreeDItemProps) {
             <meshStandardMaterial color={color} />
           </Box>
           {/* Legs */}
-          {[[-w * 0.35, 0.25, -h * 0.35], [w * 0.35, 0.25, -h * 0.35], [-w * 0.35, 0.25, h * 0.35], [w * 0.35, 0.25, h * 0.35]].map((pos, i) => (
-            <Cylinder key={i} args={[0.05, 0.05, 0.5]} position={pos as [number, number, number]}>
+          {[
+            [-w * 0.35, 0.25, -h * 0.35],
+            [w * 0.35, 0.25, -h * 0.35],
+            [-w * 0.35, 0.25, h * 0.35],
+            [w * 0.35, 0.25, h * 0.35],
+          ].map((pos, i) => (
+            <Cylinder
+              key={i}
+              args={[0.05, 0.05, 0.5]}
+              position={pos as [number, number, number]}
+            >
               <meshStandardMaterial color="#6b7280" />
             </Cylinder>
           ))}
@@ -133,7 +151,11 @@ export default function ThreeDItem({ item }: ThreeDItemProps) {
           </Cylinder>
           {/* Shade */}
           <Cone args={[0.22, 0.3, 8]} position={[0, 0.95, 0]}>
-            <meshStandardMaterial color="#eab308" emissive="#eab308" emissiveIntensity={0.3} />
+            <meshStandardMaterial
+              color="#eab308"
+              emissive="#eab308"
+              emissiveIntensity={0.3}
+            />
           </Cone>
         </group>
       );
@@ -156,7 +178,10 @@ export default function ThreeDItem({ item }: ThreeDItemProps) {
   }, [item.id, w, h, color]);
 
   return (
-    <group position={[px, 0, pz]} rotation={[0, item.rotation * (Math.PI / 180), 0]}>
+    <group
+      position={[px, 0, pz]}
+      rotation={[0, item.rotation * (Math.PI / 180), 0]}
+    >
       {geometry}
     </group>
   );

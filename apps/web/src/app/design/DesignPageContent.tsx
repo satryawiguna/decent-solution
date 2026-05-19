@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback } from "react";
 import {
   DndContext,
   DragEndEvent,
@@ -10,17 +10,17 @@ import {
   useSensor,
   useSensors,
   pointerWithin,
-} from '@dnd-kit/core';
-import { useSearchParams } from 'next/navigation';
-import { useWorkspaceStore } from '@/application/store';
-import { getTemplateById } from '@/domain/entities';
-import type { PlacedItem, FurnitureItem } from '@workspace-pro/shared';
-import DesignTopBar from '@/components/layout/DesignTopBar';
-import FurnitureLibrary from '@/components/workspace/FurnitureLibrary';
-import WorkspaceCanvas from '@/components/workspace/WorkspaceCanvas';
-import CanvasItem from '@/components/workspace/CanvasItem';
-import ThreeDScene from '@/components/workspace/ThreeDScene';
-import ViewControls from '@/components/workspace/ViewControls';
+} from "@dnd-kit/core";
+import { useSearchParams } from "next/navigation";
+import { useWorkspaceStore } from "@/application/store";
+import { getTemplateById } from "@/domain/entities";
+import type { PlacedItem, FurnitureItem } from "@workspace-pro/shared";
+import DesignTopBar from "@/components/layout/DesignTopBar";
+import FurnitureLibrary from "@/components/workspace/FurnitureLibrary";
+import WorkspaceCanvas from "@/components/workspace/WorkspaceCanvas";
+import CanvasItem from "@/components/workspace/CanvasItem";
+import ThreeDScene from "@/components/workspace/ThreeDScene";
+import ViewControls from "@/components/workspace/ViewControls";
 
 export default function DesignPageContent() {
   const searchParams = useSearchParams();
@@ -46,7 +46,7 @@ export default function DesignPageContent() {
 
   // --- Template loading ---
   useEffect(() => {
-    const templateId = searchParams.get('template');
+    const templateId = searchParams.get("template");
     if (!templateId) return;
 
     const template = getTemplateById(templateId);
@@ -68,9 +68,9 @@ export default function DesignPageContent() {
     const { active } = event;
     const data = active.data.current;
 
-    if (data?.type === 'library') {
+    if (data?.type === "library") {
       setActiveDrag(data.item as FurnitureItem);
-    } else if (data?.type === 'placed') {
+    } else if (data?.type === "placed") {
       setActiveDrag(data.item as FurnitureItem);
     }
   }, []);
@@ -80,19 +80,30 @@ export default function DesignPageContent() {
       setActiveDrag(null);
       const { active, over, delta } = event;
 
-      if (!over || over.id !== 'workspace-canvas') return;
+      if (!over || over.id !== "workspace-canvas") return;
 
       const data = active.data.current;
       if (!data) return;
 
-      // Dropped from library → add new item
-      if (data.type === 'library') {
+      // Dropped from library → place at exact drop position
+      if (data.type === "library") {
         const libItem = data.item as FurnitureItem;
+
+        // Compute position of dragged item's top-left corner relative to canvas
+        const canvasRect = over.rect;
+        const activeRect = active.rect.current.translated;
+        const x = activeRect
+          ? Math.max(0, activeRect.left - canvasRect.left)
+          : Math.max(0, delta.x);
+        const y = activeRect
+          ? Math.max(0, activeRect.top - canvasRect.top)
+          : Math.max(0, delta.y);
+
         const newItem: PlacedItem = {
           ...libItem,
           instanceId: generateId(),
-          x: Math.max(0, delta.x + 200),
-          y: Math.max(0, delta.y + 200),
+          x,
+          y,
           rotation: 0,
         };
         addItem(newItem);
@@ -100,7 +111,7 @@ export default function DesignPageContent() {
       }
 
       // Moved within canvas → update position
-      if (data.type === 'placed') {
+      if (data.type === "placed") {
         const placed = data.item as PlacedItem;
         moveItem(
           placed.instanceId,
@@ -113,9 +124,8 @@ export default function DesignPageContent() {
   );
 
   return (
-    <div className="flex h-screen flex-col overflow-hidden">
+    <div className="flex h-screen flex-col overflow-hidden bg-[#fcf9f8] text-[#1c1b1b]">
       <DesignTopBar />
-
       <DndContext
         sensors={sensors}
         collisionDetection={pointerWithin}
@@ -124,9 +134,9 @@ export default function DesignPageContent() {
       >
         <div className="flex flex-1 overflow-hidden">
           {/* Floorplan / Measure (2D) */}
-          {(viewMode === 'floorplan' || viewMode === 'measure') && (
+          {viewMode === "floorplan" && (
             <>
-              <div className="relative flex-1">
+              <div className="relative min-w-0 flex-1 overflow-hidden">
                 <WorkspaceCanvas isEmpty={items.length === 0}>
                   {items.map((item) => (
                     <CanvasItem
@@ -140,22 +150,13 @@ export default function DesignPageContent() {
                 <ViewControls />
               </div>
 
-              {viewMode === 'floorplan' && <FurnitureLibrary />}
-
-              {viewMode === 'measure' && (
-                <aside className="flex w-72 shrink-0 flex-col items-center justify-center border-l border-brand-800/60 bg-brand-950/50 p-6">
-                  <p className="text-sm font-medium text-brand-300">Measurement Mode</p>
-                  <p className="mt-2 text-center text-xs text-brand-500">
-                    Click and drag to measure distances between items on the canvas.
-                  </p>
-                </aside>
-              )}
+              <FurnitureLibrary />
             </>
           )}
 
           {/* 3D View */}
-          {viewMode === '3d' && (
-            <div className="relative flex-1">
+          {viewMode === "3d" && (
+            <div className="relative min-w-0 flex-1 overflow-hidden">
               <ThreeDScene />
               <ViewControls />
             </div>
@@ -164,16 +165,26 @@ export default function DesignPageContent() {
 
         <DragOverlay dropAnimation={null}>
           {activeDrag ? (
-            <div className="flex cursor-grabbing flex-col items-center gap-1 rounded-xl border border-brand-600 bg-brand-800 p-3 shadow-xl">
-              <img
-                src={activeDrag.imageUrl}
-                alt={activeDrag.name}
-                className="h-10 w-10 object-contain opacity-80"
-                draggable={false}
-              />
-              <span className="text-xs font-medium text-white">
-                {activeDrag.name}
-              </span>
+            <div
+              className="flex cursor-grabbing flex-col overflow-hidden rounded-[4px] border border-[#dfdfdf] bg-[#fcf9f8] shadow-xl"
+              style={{ width: 120, height: 120 }}
+            >
+              <div className="min-h-0 flex-1 overflow-hidden bg-[#ebe7e7]">
+                <img
+                  src={activeDrag.imageUrl}
+                  alt={activeDrag.name}
+                  className="h-full w-full object-cover"
+                  draggable={false}
+                />
+              </div>
+              <div className="flex shrink-0 items-center justify-between border-t border-[#dfdfdf] px-2 py-1">
+                <span className="truncate text-[11px] font-medium text-[#1c1b1b]">
+                  {activeDrag.name}
+                </span>
+                <span className="ml-1 shrink-0 text-[11px] text-[#40484e]">
+                  ${activeDrag.price}
+                </span>
+              </div>
             </div>
           ) : null}
         </DragOverlay>

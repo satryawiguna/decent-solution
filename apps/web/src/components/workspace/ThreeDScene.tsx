@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Grid, Environment } from '@react-three/drei';
-import { useWorkspaceStore } from '@/application/store';
-import ThreeDItem from './ThreeDItem';
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, Grid, Environment } from "@react-three/drei";
+import { useWorkspaceStore } from "@/application/store";
+import ThreeDItem from "./ThreeDItem";
 
 export default function ThreeDScene() {
   const items = useWorkspaceStore((s) => s.items);
@@ -13,7 +13,7 @@ export default function ThreeDScene() {
       <Canvas
         camera={{ position: [10, 8, 10], fov: 50 }}
         gl={{ antialias: true, alpha: true }}
-        style={{ background: '#0f1522' }}
+        style={{ background: "#0f1522" }}
       >
         {/* Lighting */}
         <ambientLight intensity={0.4} />
@@ -24,7 +24,11 @@ export default function ThreeDScene() {
         <Environment preset="city" />
 
         {/* Floor */}
-        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]} receiveShadow>
+        <mesh
+          rotation={[-Math.PI / 2, 0, 0]}
+          position={[0, -0.01, 0]}
+          receiveShadow
+        >
           <planeGeometry args={[30, 30]} />
           <meshStandardMaterial color="#1a2335" />
         </mesh>

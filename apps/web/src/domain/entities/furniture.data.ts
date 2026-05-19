@@ -2,17 +2,18 @@ import type { FurnitureItem } from "@workspace-pro/shared";
 
 // ---------------------------------------------------------------------------
 // Furniture Catalog – seed data for the Furniture Library sidebar
-// Images are placeholder SVG data URIs (simple colored shapes).
 // ---------------------------------------------------------------------------
 
 export const furnitureCatalog: FurnitureItem[] = [
-  // ---- CHAIRS (3) ----
+  // ---- CHAIRS ----
   {
     id: "chair-ergo",
     name: "Ergonomic Chair",
     category: "chairs",
     price: 45,
-    imageUrl: "/placeholders/chair-ergo.svg",
+    isNew: true,
+    imageUrl:
+      "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?w=600&q=80",
     dimensions: { width: 2, height: 2 },
     description: "Full back support with adjustable armrests.",
   },
@@ -21,7 +22,8 @@ export const furnitureCatalog: FurnitureItem[] = [
     name: "Mesh Office Chair",
     category: "chairs",
     price: 35,
-    imageUrl: "/placeholders/chair-mesh.svg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1541558869434-2840d308329a?w=600&q=80",
     dimensions: { width: 2, height: 2 },
     description: "Breathable mesh back, lightweight frame.",
   },
@@ -30,18 +32,31 @@ export const furnitureCatalog: FurnitureItem[] = [
     name: "Lounge Chair",
     category: "chairs",
     price: 55,
-    imageUrl: "/placeholders/chair-lounge.svg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=600&q=80",
     dimensions: { width: 2, height: 3 },
     description: "Comfortable lounge seating for breakout areas.",
   },
+  {
+    id: "chair-executive",
+    name: "Executive Chair",
+    category: "chairs",
+    price: 95,
+    imageUrl:
+      "https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?w=600&q=80",
+    dimensions: { width: 2, height: 2 },
+    description: "High-back leather executive chair.",
+  },
 
-  // ---- DESKS (4) ----
+  // ---- DESKS ----
   {
     id: "desk-standing",
     name: "Standing Desk",
     category: "desks",
     price: 120,
-    imageUrl: "/placeholders/desk-standing.svg",
+    isNew: true,
+    imageUrl:
+      "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=600&q=80",
     dimensions: { width: 4, height: 2 },
     description: "Electric height-adjustable standing desk.",
   },
@@ -50,7 +65,8 @@ export const furnitureCatalog: FurnitureItem[] = [
     name: "Corner Desk",
     category: "desks",
     price: 90,
-    imageUrl: "/placeholders/desk-corner.svg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=600&q=80",
     dimensions: { width: 4, height: 3 },
     description: "L-shaped desk ideal for corner placement.",
   },
@@ -59,7 +75,8 @@ export const furnitureCatalog: FurnitureItem[] = [
     name: "Compact Desk",
     category: "desks",
     price: 60,
-    imageUrl: "/placeholders/desk-compact.svg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&q=80",
     dimensions: { width: 3, height: 2 },
     description: "Space-saving desk for small rooms.",
   },
@@ -68,18 +85,20 @@ export const furnitureCatalog: FurnitureItem[] = [
     name: "Executive Desk",
     category: "desks",
     price: 150,
-    imageUrl: "/placeholders/desk-executive.svg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80",
     dimensions: { width: 5, height: 3 },
     description: "Premium solid-wood executive desk.",
   },
 
-  // ---- STORAGE (4) ----
+  // ---- STORAGE ----
   {
     id: "storage-shelf",
     name: "Bookshelf",
     category: "storage",
     price: 40,
-    imageUrl: "/placeholders/storage-shelf.svg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1481277542470-605612bd2d61?w=600&q=80",
     dimensions: { width: 3, height: 1 },
     description: "Five-tier open bookshelf.",
   },
@@ -88,7 +107,8 @@ export const furnitureCatalog: FurnitureItem[] = [
     name: "Filing Cabinet",
     category: "storage",
     price: 50,
-    imageUrl: "/placeholders/storage-cabinet.svg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80",
     dimensions: { width: 2, height: 2 },
     description: "Lockable metal filing cabinet.",
   },
@@ -97,7 +117,8 @@ export const furnitureCatalog: FurnitureItem[] = [
     name: "Mobile Drawer Unit",
     category: "storage",
     price: 30,
-    imageUrl: "/placeholders/storage-drawer.svg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1519974719765-e6559eac2575?w=600&q=80",
     dimensions: { width: 2, height: 2 },
     description: "Rolling drawer unit fits under most desks.",
   },
@@ -106,18 +127,20 @@ export const furnitureCatalog: FurnitureItem[] = [
     name: "Wardrobe",
     category: "storage",
     price: 70,
-    imageUrl: "/placeholders/storage-wardrobe.svg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1558997519-83ea9252edf8?w=600&q=80",
     dimensions: { width: 3, height: 2 },
     description: "Tall storage wardrobe with hanging rail.",
   },
 
-  // ---- MISC (4) ----
+  // ---- MISC ----
   {
     id: "misc-monitor",
     name: "Ultrawide Monitor",
     category: "misc",
     price: 80,
-    imageUrl: "/placeholders/misc-monitor.svg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600&q=80",
     dimensions: { width: 3, height: 1 },
     description: '34" curved ultrawide display.',
   },
@@ -126,7 +149,8 @@ export const furnitureCatalog: FurnitureItem[] = [
     name: "Desk Lamp",
     category: "misc",
     price: 25,
-    imageUrl: "/placeholders/misc-lamp.svg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600&q=80",
     dimensions: { width: 1, height: 1 },
     description: "Adjustable LED desk lamp with warm light.",
   },
@@ -135,7 +159,8 @@ export const furnitureCatalog: FurnitureItem[] = [
     name: "Indoor Plant",
     category: "misc",
     price: 20,
-    imageUrl: "/placeholders/misc-plant.svg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1463320898484-cdee8141c787?w=600&q=80",
     dimensions: { width: 1, height: 1 },
     description: "Low-maintenance snake plant in ceramic pot.",
   },
@@ -144,7 +169,8 @@ export const furnitureCatalog: FurnitureItem[] = [
     name: "Whiteboard",
     category: "misc",
     price: 35,
-    imageUrl: "/placeholders/misc-whiteboard.svg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=80",
     dimensions: { width: 4, height: 1 },
     description: "Magnetic whiteboard with marker tray.",
   },

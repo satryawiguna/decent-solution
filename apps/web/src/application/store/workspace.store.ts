@@ -105,9 +105,21 @@ export const useWorkspaceStore = create<WorkspaceStore>()(
       partialize: (state) => ({
         items: state.items,
         selectedTemplateId: state.selectedTemplateId,
-        viewMode: state.viewMode,
+        // viewMode intentionally excluded – always starts as "floorplan"
         _nextId: state._nextId,
       }),
+      // Custom merge: only apply persisted fields we care about.
+      // Prevents stale fields (e.g. old viewMode) from bleeding in.
+      merge: (persisted, current) => {
+        const p = persisted as Partial<typeof current>;
+        return {
+          ...current,
+          items: p.items ?? current.items,
+          selectedTemplateId:
+            p.selectedTemplateId ?? current.selectedTemplateId,
+          _nextId: p._nextId ?? current._nextId,
+        };
+      },
     },
   ),
 );

@@ -1,1 +1,2 @@
-export { default as Header } from "./Header";export { default as DesignTopBar } from './DesignTopBar';
+export { default as Header } from "./Header";
+export { default as DesignTopBar } from "./DesignTopBar";

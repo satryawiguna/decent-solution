@@ -1,42 +1,50 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { LayoutGrid } from 'lucide-react';
-import { useWorkspaceStore, selectItemCount, selectTotalPrice } from '@/application/store';
+import Link from "next/link";
+import { ShoppingBag, Bookmark, Share2 } from "lucide-react";
+import {
+  useWorkspaceStore,
+  selectItemCount,
+  selectTotalPrice,
+} from "@/application/store";
 
 export default function DesignTopBar() {
   const itemCount = useWorkspaceStore(selectItemCount);
   const totalPrice = useWorkspaceStore(selectTotalPrice);
 
   return (
-    <header className="flex h-14 shrink-0 items-center justify-between border-b border-brand-800/60 bg-brand-950/90 px-6">
+    <header className="flex h-16 shrink-0 items-center justify-between border-b border-[#dfdfdf] bg-[#fcf9f8] px-6">
       {/* Logo */}
-      <Link href="/" className="flex items-center gap-2 text-lg font-bold text-white">
-        <LayoutGrid className="h-5 w-5 text-blue-400" />
-        <span>WorkspacePro</span>
+      <Link href="/" className="text-xl font-bold text-[#00415e]">
+        WorkspacePro
       </Link>
 
-      {/* Stats */}
-      <div className="flex items-center gap-4 text-sm text-brand-300">
-        <span>
-          Items: <span className="font-medium text-white">{itemCount}</span>
-        </span>
-        <span className="text-brand-600">|</span>
-        <span>
-          Total:{' '}
-          <span className="font-medium text-white">
+      {/* Stats pill */}
+      <div className="flex items-center gap-4 rounded-xl border border-[#dfdfdf] bg-white px-6 py-[9px] shadow-[0px_1px_1px_rgba(0,0,0,0.05)]">
+        <div className="flex items-center gap-2">
+          <ShoppingBag className="h-[19px] w-[22px] text-[#40484e]" />
+          <span className="text-[14px] font-medium tracking-[0.14px] text-[#40484e]">
+            Items: <span className="font-bold text-[#1c1b1b]">{itemCount}</span>
+          </span>
+        </div>
+        <div className="h-4 w-px bg-[#dfdfdf]" />
+        <span className="text-[14px] font-medium tracking-[0.14px] text-[#40484e]">
+          Total:{" "}
+          <span className="font-bold text-[#00415e]">
             ${totalPrice.toFixed(2)}
           </span>
         </span>
       </div>
 
-      {/* CTA */}
-      <Link
-        href="/checkout"
-        className="rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-500"
-      >
-        Review Setup &rarr;
-      </Link>
+      {/* Actions */}
+      <div className="flex items-center gap-4">
+        <button className="text-[#1c1b1b] transition-opacity hover:opacity-60">
+          <Bookmark className="h-[18px] w-[18px]" />
+        </button>
+        <button className="text-[#1c1b1b] transition-opacity hover:opacity-60">
+          <Share2 className="h-[18px] w-[18px]" />
+        </button>
+      </div>
     </header>
   );
 }
